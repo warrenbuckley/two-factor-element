@@ -3,9 +3,6 @@ import { customElement, property } from 'lit/decorators.js'
 
 /**
  * TwoFactor Code Entry element.
- *
- * @slot - This element has a slot
- * @csspart button - The button
  */
 @customElement('two-factor')
 export class TwoFactorElement extends LitElement {
@@ -19,29 +16,32 @@ export class TwoFactorElement extends LitElement {
   `
 
   /**
-   * The name to say "Hello" to.
+   * The length of the two factor auth code
+   * By default this is set to 6 which is common for most 2FA codes
    */
-  @property()
-  name = 'World'
+  @property({ type: Number, attribute: 'length' })
+  codeLength = 6;
 
   /**
-   * The number of times the button has been clicked.
+   * This creates the HTML inside the WebComponent Shadow DOM
+   * Where we create an HTML input field for each of the numbers for the code
+   * 
+   * @returns HTML of the WebComponent in the shadow DOM
    */
-  @property({ type: Number })
-  count = 0
-
   render() {
-    return html`
-      <h1>Hello, ${this.name}!</h1>
-      <button @click=${this._onClick} part="button">
-        Click Count: ${this.count}
-      </button>
-      <slot></slot>
-    `
-  }
+    const itemTemplates = [];
+    for (let i = 0; i < this.codeLength; i++) {
+      itemTemplates.push(
+        html`<input type="text" 
+              size="1" 
+              maxlength="1" 
+              inputmode="numeric"
+              pattern="[0-9]"
+              placeholder="${i + 1}" />`
+      );
+    }
 
-  private _onClick() {
-    this.count++
+    return html`<div part="code">${itemTemplates}</div>`;
   }
 }
 
