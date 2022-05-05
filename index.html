@@ -5,10 +5,28 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Vite + Lit Two Factor Element</title>
     <script type="module" src="/src/two-factor-element.ts"></script>
+    
+    <script type="module" src="/src/example-app.ts"></script>
+
+    <style>
+      label {
+        display: block;
+      }
+    </style>
+
   </head>
   <body>
-    <h1>Default 2FA</h1>
-    <two-factor></two-factor>
+    <h1>Default 2FA in Form</h1>
+    <form>
+      <label for="name">Name</label>
+      <input type="text" name="name" placeholder="Warren" />
+
+      <label for="code">Code</label>
+      <two-factor name="code"></two-factor>
+
+      <button type="submit">Submit</button>
+      <button type="reset">Reset</button>
+    </form>    
 
     <hr/>
 
