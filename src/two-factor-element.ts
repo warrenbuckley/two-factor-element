@@ -2,13 +2,13 @@ import { html, css, LitElement } from 'lit'
 import { customElement, property } from 'lit/decorators.js'
 
 /**
- * An example element.
+ * TwoFactor Code Entry element.
  *
  * @slot - This element has a slot
  * @csspart button - The button
  */
-@customElement('my-element')
-export class MyElement extends LitElement {
+@customElement('two-factor')
+export class TwoFactorElement extends LitElement {
   static styles = css`
     :host {
       display: block;
@@ -43,14 +43,10 @@ export class MyElement extends LitElement {
   private _onClick() {
     this.count++
   }
-
-  foo(): string {
-    return 'foo'
-  }
 }
 
 declare global {
   interface HTMLElementTagNameMap {
-    'my-element': MyElement
+    'two-factor': TwoFactorElement
   }
 }
